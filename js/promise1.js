@@ -36,3 +36,37 @@ let doWorkPromise = function (job, timer) {
     .catch((err) => {
       console.error('發生錯誤', err);
     });
+
+function brushTeeth() {
+  // 在 3 秒後執行 "刷牙" 的動作
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Brushing teeth');
+      resolve();
+    }, 3000);
+  });
+}
+
+function eatBreakfast() {
+  // 在 5 秒後執行 "吃早餐" 的動作
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Eating breakfast');
+      resolve();
+    }, 5000);
+  });
+}
+
+function doHomework() {
+  // 在 3 秒後執行 "寫功課" 的動作
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Doing homework');
+      resolve();
+    }, 3000);
+  });
+}
+console.log('start');
+brushTeeth()
+  .then(() => eatBreakfast())
+  .then(() => doHomework());
