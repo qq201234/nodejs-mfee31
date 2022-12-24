@@ -52,19 +52,19 @@ app.use((req, res, next) => {
 // app.[Method]
 // get, post, put, patch, delete, option, head
 // 路由中間件
-app.get('/', (req, res, next) => {
+app.get('/', (req, res) => {
   console.log('這裡是首頁 2', req.mfee31, req.dt);
   res.send('Hello Express 9');
 });
 
-app.get('/api', (req, res, next) => {
+app.get('/api', (req, res) => {
   res.json({
     name: 'John',
     age: 18,
   });
 });
 
-app.get('/api/stocks', async (req, res, next) => {
+app.get('/api/stocks', async (req, res) => {
   // let results = await connection.query('SELECT * FROM stocks');
   // let data = results[0];
   console.log('這裡是 /api/stocks');
@@ -80,7 +80,7 @@ app.get('/api/stocks', async (req, res, next) => {
 // localhost:3001/api/stocks/1234 or 1=1;--
 // req.params.stockId => 1234 or 1=1;--
 // SELECT * FROM stock_prices WHERE stock_id=1234 or 1=1;--
-app.get('/api/stocks/:stockId', async (req, res, next) => {
+app.get('/api/stocks/:stockId', async (req, res) => {
   console.log('/api/stocks/:stockId => ', req.params.stockId);
   // 會用 prepared statement 的方式來避免發生 sql injection
   let [data] = await pool.query('SELECT * FROM stock_prices WHERE stock_id=?', [req.params.stockId]);
@@ -101,7 +101,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/test', (req, res, next) => {
+app.get('/test', (req, res) => {
   console.log('這裡是 test 頁面', req.dt);
   res.send('Hello Test 1');
 });
@@ -110,7 +110,7 @@ app.get('/test', (req, res, next) => {
 // 前面所有的路由都比不到對的網址時，就會掉到這裡來
 // --> 這就是一個 404 的情況
 // 利用了中間件會依照程式碼順序來執行的特性
-app.use((req, res, next) => {
+app.use((req, res) => {
   console.log('這裡是 404');
   res.send('沒有這個網頁啦');
 });
