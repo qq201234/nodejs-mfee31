@@ -1,3 +1,5 @@
+// axios promise 版本
+
 // 1. 安裝 npm i axios
 // 2. 引用 require
 // 3. 去讀官方文件
@@ -12,4 +14,3 @@ axios
   .catch((e) => {
     console.error(e);
   });
-  
