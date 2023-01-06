@@ -29,8 +29,8 @@ const Stock = () => {
   }, [counter]);
 
   // TODO: 把預設值拿掉，跟 input 綁定
-  const [stockId, setStockId] = useState('5678');
-  const [stockName, setStockName] = useState('耶誕快樂');
+  const [stockId, setStockId] = useState('');
+  const [stockName, setStockName] = useState('');
   async function handleSubmit(e) {
     console.log('handleSubmit');
     e.preventDefault();
@@ -38,6 +38,8 @@ const Stock = () => {
       stockId,
       stockName,
     });
+    // setStocks([...stocks, {[e.target.name]: e.target.value}])
+    setStocks([...stocks, {id: stockId, name: stockName}])
     console.log(response.data);
   }
 
@@ -71,13 +73,13 @@ const Stock = () => {
           <label htmlFor="name" className="flex mb-2 w-32">
             股票代碼
           </label>
-          <input className="w-full border-2 border-purple-200 rounded-md h-10 focus:outline-none focus:border-purple-400 px-2" type="text" id="stockId" name="stockId" />
+          <input className="w-full border-2 border-purple-200 rounded-md h-10 focus:outline-none focus:border-purple-400 px-2" type="text" id="stockId" name="stockId" onChange={(e)=>{setStockId(e.target.value)}} value={stocks.id}/>
         </div>
         <div className="mb-8 text-2xl">
           <label htmlFor="password" className="flex mb-2 w-32">
             股票名稱
           </label>
-          <input className="w-full border-2 border-purple-200 rounded-md h-10 focus:outline-none focus:border-purple-400 px-2" type="text" id="stockName" name="stockName" />
+          <input className="w-full border-2 border-purple-200 rounded-md h-10 focus:outline-none focus:border-purple-400 px-2" type="text" id="stockName" name="stockName" onChange={(e)=>{setStockName(e.target.value)}} value={stocks.name}/>
         </div>
         <button className="text-xl bg-indigo-300 px-4 py-2.5 rounded hover:bg-indigo-400 transition duration-200 ease-in" onClick={handleSubmit}>
           新增
